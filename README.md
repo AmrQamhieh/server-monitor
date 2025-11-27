@@ -5,7 +5,7 @@ Metrics are collected via SSH, stored in a **MariaDB database**, and exposed thr
 Runs entirely in **Podman/Docker containers**.
 
 ---
-## ✨ Features?
+## ✨ Features
 - Collects **CPU%, Memory%, Disk%** from a remote host
 - Stores results in **MariaDB**
 - REST API endpoints:
