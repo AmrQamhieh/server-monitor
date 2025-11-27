@@ -16,7 +16,7 @@ Runs entirely in **Podman/Docker containers**.
 - Web dashboard at `/`
 - Unit tests with `unittest`
 - Ready‑to‑use image on Docker Hub:  
-  `docker.io/amrqamhieh/server-monitor:v1`
+  `docker.io/amrqam/server-monitor:v1`
 ---
 ## 📦 Project Structure
 ```bash
