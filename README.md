@@ -115,6 +115,7 @@ or with Docker:
 docker pull amrqam/server-monitor:v1
 ```
 But note:
+
 ✔ You still need to clone the repo because podman-compose.yml defines the MariaDB service.
 
 ✔ The compose file currently builds locally (build: .), so Docker Hub image is optional.
