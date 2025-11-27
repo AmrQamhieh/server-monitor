@@ -73,6 +73,7 @@ podman-compose up -d
 ```
 This will start:
 db → MariaDB
+
 server-monitor-app → Flask API + Dashboard
 
 ---
@@ -124,7 +125,7 @@ podman pull docker.io/amrqam/server-monitor:v1
 ```
 or with Docker:
 ```bash
-docker pull amrqamhieh/server-monitor:v1
+docker pull amrqam/server-monitor:v1
 ```
 ____________________
 
