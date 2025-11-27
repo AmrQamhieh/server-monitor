@@ -1,0 +1,6 @@
+Flask
+mysql-connector-python
+paramiko
+SQLAlchemy
+PyMySQL
+

@@ -1,0 +1,10 @@
+env
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.git
+.gitignore
+cron.log
+usage.db
