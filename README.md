@@ -43,7 +43,9 @@ HOST_PASSWORD=root
 .....
 ```
 ✔ db is the name of the MariaDB service
+
 ✔ SSH settings allow the app container to read host usage
+
 ✔ Change passwords if needed
 
 ----
