@@ -134,5 +134,30 @@ Rebuild from source:
 ```bash
 podman build -t server-monitor .
 ```
+____________
 
+### 🗂️ What the App Container Looks Like Inside
+If you run:
+```bash
+podman exec -it server-monitor-app bash
+```
+You'll see a very small and clean filesystem:
+```bash
+/app
+│── app/
+│   ├── app.py              # Flask API and dashboard routes
+│   ├── collector.py        # Collects CPU/MEM/DISK via SSH
+│   ├── remote_usage.py     # Paramiko SSH helper
+│   ├── logging_utils.py    # Logging + decorator
+│   └── templates/
+│       └── dashboard.html
+│
+│── tests/
+│   ├── test_app.py
+│   └── test_collector_job.py
+│
+│── requirements.txt
+│── server-monitor.env      # injected by podman-compose
+│── __pycache__/            # Python compiled files
+```
 
