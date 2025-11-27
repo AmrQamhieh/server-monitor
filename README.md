@@ -73,9 +73,9 @@ HOST_PASSWORD=root
 podman-compose up -d
 ```
 This will start:
-
 db → MariaDB
 server-monitor-app → Flask API + Dashboard
+
 ---
 ### 3️⃣ Access the app
 Dashboard → http://localhost:5001/
@@ -84,11 +84,11 @@ Health check → http://localhost:5001/health
 
 Latest metrics → http://localhost:5001/latest
 
-CPU Metrics → http://localhost:5001/cpu/current **OR** http://localhost:5001/cpu/last24hours
+CPU Metrics → http://localhost:5001/cpu/current *OR* http://localhost:5001/cpu/last24hours
 
-MEMORY Metrics → http://localhost:5001/mem/current **OR** http://localhost:5001/mem/last24hours
+MEMORY Metrics → http://localhost:5001/mem/current *OR* http://localhost:5001/mem/last24hours
 
-DISK Metrics → http://localhost:5001/disk/current **OR** http://localhost:5001/disk/last24hours
+DISK Metrics → http://localhost:5001/disk/current *OR* http://localhost:5001/disk/last24hours
 
 ---
 ## 🧪 Running Unit Tests
