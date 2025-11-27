@@ -5,7 +5,7 @@ Metrics are collected via SSH, stored in a **MariaDB database**, and exposed thr
 Runs entirely in **Podman/Docker containers**.
 
 ---
-## ✨ What It Does?
+## ✨ Features?
 - Collects **CPU%, Memory%, Disk%** from a remote host
 - Stores results in **MariaDB**
 - REST API endpoints:
@@ -15,42 +15,19 @@ Runs entirely in **Podman/Docker containers**.
   - `/cpu/...`, `/mem/...`, `/disk/...` → detailed views
 - Web dashboard at `/`
 - Unit tests with `unittest`
-- Ready‑to‑use image on Docker Hub:  
-  `docker.io/amrqam/server-monitor:v1`
+- Optional prebuilt image available on Docker Hub (amrqam/server-monitor:v1)
 ---
-## 📦 Project Structure
-```bash
-server-monitor/
-│── app/
-│   ├── app.py               # Flask API + dashboard
-│   ├── collector.py         # Collect usage from remote host
-│   ├── remote_usage.py      # SSH logic (Paramiko)
-│   ├── logging_utils.py     # Logger + decorator
-│   └── templates/
-│       └── dashboard.html
-│
-│── tests/
-│   ├── test_app.py
-│   └── test_collector_job.py
-│
-│── Dockerfile
-│── podman-compose.yml
-│── requirements.txt
-│── server-monitor.env.example
-│── README.md
-```
 
+## 📦 Quick Start (Recommended)
 
-## 📦 Quick Start
-
-### 1. Clone & Configure
+### Clone & Configure
 ```bash
 git clone https://github.com/amrqamhieh/server-monitor.git
 cd server-monitor
 ```
 ---
 
-## 🐳 Option 1 - Running with Podman Compose
+## 🐳 Running with Podman Compose
 
 Make sure you have **Podman** & **podman-compose** installed.
 
@@ -65,9 +42,17 @@ HOST_USER=root
 HOST_PASSWORD=root
 .....
 ```
-----
+✔ db is the name of the MariaDB service
+✔ SSH settings allow the app container to read host usage
+✔ Change passwords if needed
 
-### 2️⃣ Start the database + app
+----
+### 2️⃣ Create the logs folder
+```bash
+mkdir logs
+```
+
+### 3️⃣ Start the database + app
 ```bash
 podman-compose up -d
 ```
@@ -107,7 +92,7 @@ Example output:
 {"cpu": 83.0, "mem": 37.5, "disk": 40.0}
 ```
 ---
-### ⏰ Automating Collection (Cron)
+### ⏱️ Automate Data Collection (host cronjob)
 **Run cron on the host**
 ```bash
 crontab -e
@@ -116,10 +101,12 @@ Add:
 ```bash
 0 * * * * cd ~/server-monitor && podman exec server-monitor-app python3 -m app.collector
 ```
+This runs the collector every hour.
+
 ____________________
 
-### 🐳 Option 2 - Pulling From Docker Hub
-Run the app directly from the published image:
+### 🐳 Optional: Pull the Prebuilt Image
+If someone doesn't want to build the app locally:
 ```bash
 podman pull docker.io/amrqam/server-monitor:v1
 ```
@@ -127,30 +114,31 @@ or with Docker:
 ```bash
 docker pull amrqam/server-monitor:v1
 ```
+But note:
+✔ You still need to clone the repo because podman-compose.yml defines the MariaDB service.
+✔ The compose file currently builds locally (build: .), so Docker Hub image is optional.
+
 ____________________
 
-### 🗂️ What the App Container Looks Like Inside
-If you run:
+## 🗂️ Project Structure
 ```bash
-podman exec -it server-monitor-app bash
-```
-You'll see a very small and clean filesystem:
-```bash
-/app
-│── app/
-│   ├── app.py              # Flask API and dashboard routes
-│   ├── collector.py        # Collects CPU/MEM/DISK via SSH
-│   ├── remote_usage.py     # Paramiko SSH helper
-│   ├── logging_utils.py    # Logging + decorator
+server-monitor/
+│
+├── app/
+│   ├── app.py               # Flask API
+│   ├── collector_job.py     # Collector script
+│   ├── remote_usage.py      # SSH usage reader
+│   ├── logging_utils.py     # Logging
 │   └── templates/
 │       └── dashboard.html
 │
-│── tests/
-│   ├── test_app.py
-│   └── test_collector_job.py
-│
-│── requirements.txt
-│── server-monitor.env      # injected by podman-compose
-│── __pycache__/            # Python compiled files
+├── tests/                   # Unit tests
+├── Dockerfile
+├── podman-compose.yml
+├── server-monitor.env       # (you create this)
+├── requirements.txt
+└── logs/                    # (must be created)
+
 ```
+
 
