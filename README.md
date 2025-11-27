@@ -47,7 +47,6 @@ server-monitor/
 ```bash
 git clone https://github.com/amrqamhieh/server-monitor.git
 cd server-monitor
-cp server-monitor.env.example server-monitor.env
 ```
 ---
 
