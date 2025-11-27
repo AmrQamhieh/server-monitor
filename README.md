@@ -128,13 +128,6 @@ docker pull amrqamhieh/server-monitor:v1
 ```
 ____________________
 
-### 🏗️ Option 3 - Building the Image 
-Rebuild from source:
-```bash
-podman build -t server-monitor .
-```
-____________
-
 ### 🗂️ What the App Container Looks Like Inside
 If you run:
 ```bash
